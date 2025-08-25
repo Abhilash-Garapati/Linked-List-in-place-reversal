@@ -1,0 +1,36 @@
+class Solution 
+{
+    public static Node reverseBetween(int a, int b, Node head) 
+    {
+        // code here
+        if(a>=b || head ==null)
+        {
+            return head;
+        }
+        Node dummy = new Node(0);
+        dummy.next = head;
+        Node prev = dummy;
+        int i = 1;
+        // step :1 move prev to node before 'a'
+        while(i<a)
+        {
+            prev = prev.next;
+            i++;
+        }
+        //step :2 reverse sublist from a to b
+        Node curr = prev.next;
+        Node nextNode = null;
+        Node last = curr;
+        Node prevNode = null;
+        for(i = a;i<=b;i++)
+        {
+            nextNode = curr.next;
+            curr.next = prevNode;
+            prevNode = curr;
+            curr = nextNode;
+        }
+        prev.next = prevNode;
+        last.next = curr;
+        return dummy.next;
+    }
+}
